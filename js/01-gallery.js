@@ -1,20 +1,7 @@
-/* import { galleryItems } from './gallery-items.js';
+import { galleryItems } from './gallery-items.js';
 // Change code below this line
-const gallery = document.querySelector(".gallery");
-const galleryItemsNew = galleryItems.join("").map(
-    (galleryItem) => <li class="galleryItem">
-        <a class="gelleryLink" href="${galleryItem.original}">
-            <img class="galleryImage"
-                src="${galleryItem.preview}"
-                alt="${galleryItem.description}"
-                data-source="${galleryItem.original}">
-            </img>
-        </a>
-    </li>
-);
-gallery.insertAdjacentHTML("afterbegin", galleryItemsNew);
-console.log(galleryItems);
- */
+
+
 //Dostęp do dokumentu
 const gallery = document.querySelector(".gallery");
 //Tworzenie tablicy danych i znaczników galerii
@@ -55,3 +42,6 @@ function openModal(imageUrl) {
   
   instance.show();
 }
+
+
+console.log(galleryItems);

@@ -4,7 +4,7 @@ import { galleryItems } from './gallery-items.js';
 console.log(galleryItems);
 
 const galleryElement = document.querySelector(".gallery");
-const galleryList = galleryItems
+const listGalleryItems = galleryItems
   .map(
     ({ preview, original, description }) =>
       `<li class="gallery__item">
@@ -14,7 +14,7 @@ const galleryList = galleryItems
   )
   .join("");
 
-galleryElement.insertAdjacentHTML("beforeend", galleryList);
+galleryElement.insertAdjacentHTML("beforeend", listGalleryItems);
 
 let lightbox = new SimpleLightbox(".gallery a", {
   captionsData: "alt",
