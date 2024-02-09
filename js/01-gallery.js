@@ -1,47 +1,39 @@
-import { galleryItems } from './gallery-items.js';
-// Change code below this line
-
-
-//Dostęp do dokumentu
+import { galleryItems } from "./gallery-items.js";
 const gallery = document.querySelector(".gallery");
-//Tworzenie tablicy danych i znaczników galerii
-const listGalleryItems = galleryItems.map(
-  (galleryItem) =>
-    `<li class="gallery__item">
-      <a class="gallery__link" href="${galleryItem.original}">
-      <img
-        class="gallery__image"
-        src="${galleryItem.preview}" 
-        alt="${galleryItem.description}"
-        data-source="${galleryItem.original}"
-        >
-        </img>
-        </a>
-     </li>`
-).join('');
-//Otwieranie okna modalnego po kliknięciu
-document.querySelector('.gallery').addEventListener('click', function (event) {
-    if (event.target.tagName === 'IMG') {
-    event.preventDefault();
-    const imageUrl = event.target.dataset.source;
-    openModal(imageUrl);
-  }
+
+document.body.addEventListener("keypress", (e) => {
+  if (e.key === "Escape") basicLightbox.close();
 });
-function openModal(imageUrl) {
-  const instance = basicLightbox.create(`<img src="${imageUrl}" alt="Image">`);
-  instance.element().addEventListener('click', function (event) {
-    if (event.target === instance.content) {
-      instance.close();
-    }
-  });
-    window.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') {
-      instance.close();
-    }
-  });
-  
-  instance.show();
+
+for (let item of galleryItems) {
+  const galleryItem = document.createElement("div");
+  galleryItem.classList.add("gallery__item");
+
+  const galleryLink = document.createElement("a");
+  galleryLink.classList.add("gallery__link");
+  galleryLink.href = item.original;
+
+  const galleryImage = document.createElement("img");
+  galleryImage.classList.add("gallery__image");
+  galleryImage.src = item.preview;
+  galleryImage.dataset.source = item.original;
+  galleryImage.alt = item.description;
+
+  galleryLink.appendChild(galleryImage);
+  galleryItem.appendChild(galleryLink);
+  gallery.appendChild(galleryItem);
 }
 
+gallery.addEventListener("click", (event) => {
+  event.preventDefault();
+
+  const lightbox = basicLightbox.create(`
+    <img src="${event.target.dataset.source}" width="800" height="600">
+  `);
+
+  lightbox.show();
+});
+
+// Change code below this line
 
 console.log(galleryItems);
